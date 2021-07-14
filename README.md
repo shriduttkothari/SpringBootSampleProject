@@ -5,6 +5,8 @@ SpringBoot Sample Project
 - Java version: 1.8
 - Maven version: 3.*
 - Spring Boot version: 2.3.6.RELEASE
+- Junit 5
+- Lombok 
 
 ## Commands
 - run: 
