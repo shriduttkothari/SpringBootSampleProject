@@ -22,6 +22,7 @@
 	<modules>
 		<module>sample-dao</module>
 		<module>sample-rest-api</module>
+		<module>hotel-rest-api</module>
 	</modules>
 
 	<dependencies>
