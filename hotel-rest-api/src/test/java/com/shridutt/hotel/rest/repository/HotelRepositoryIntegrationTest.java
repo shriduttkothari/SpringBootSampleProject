@@ -7,7 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.shridutt.hotel.rest.dao.HotelRepository;
@@ -15,16 +17,20 @@ import com.shridutt.hotel.rest.model.Hotel;
 
 @ExtendWith(SpringExtension.class)
 @DataJpaTest
+@TestPropertySource(locations = { "classpath:context-test.properties" })
 public class HotelRepositoryIntegrationTest {
 
 	@Autowired
 	private HotelRepository hotelRepository;
 
+	@Value("${load.data}")
+	private boolean loadData;
+
 	@Test
 	public void whenCalledSave_thenCorrectNumberOfUsers() {
 		Hotel hotel = buildHotel();
 		hotelRepository.save(hotel);
-		
+
 		List<Hotel> hotels = (List<Hotel>) hotelRepository.findAll();
 
 		assertThat(hotels.size()).isEqualTo(1);

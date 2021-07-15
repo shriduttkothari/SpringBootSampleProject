@@ -7,10 +7,12 @@ import java.util.ArrayList;
 
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 import com.shridutt.hotel.rest.dao.HotelRepository;
@@ -20,17 +22,23 @@ import com.shridutt.hotel.rest.model.Hotel;
 @EnableAutoConfiguration
 public class SampleSpringBootApplication {
 
+	@Value("${load.data}")
+	private boolean loadData;
+	
 	public static void main(String[] args) {
 		SpringApplication.run(SampleSpringBootApplication.class, args);
 	}
 
+	@ConditionalOnProperty(name = "load.data", havingValue = "true")
 	@Bean
 	public CommandLineRunner run(HotelRepository hotelRepository) throws Exception {
 		return (String[] args) -> {
-			ArrayList<Hotel> hotelsFromCSV = readCSV();
-			hotelsFromCSV.stream().forEach(hotel -> {
-				hotelRepository.save(hotel);
-			});
+			//if(loadData) {
+				ArrayList<Hotel> hotelsFromCSV = readCSV();
+				hotelsFromCSV.stream().forEach(hotel -> {
+					hotelRepository.save(hotel);
+				});
+			//}
 			hotelRepository.findAll().forEach(hotel -> System.out.println(hotel));
 		};
 	}
