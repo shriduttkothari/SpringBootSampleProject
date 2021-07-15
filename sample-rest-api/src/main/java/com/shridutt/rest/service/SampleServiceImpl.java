@@ -12,7 +12,7 @@ public class SampleServiceImpl implements SampleService {
 
 	@Autowired
 	private SampleRepository sampleRepository;
-
+	
 	@Override
 	public StringResponse getStringResponse() {
 		StringResponse stringResponse = StringResponse.builder().echo("Default Hello World!").build();

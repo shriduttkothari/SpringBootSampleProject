@@ -10,6 +10,10 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import com.shridutt.dao.SampleRepositoryImpl;
+import com.shridutt.dao.SampleRepositoryImpl2;
+import com.shridutt.rest.service.SampleServiceImpl;
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest(classes = SampleSpringBootApplication.class)
 @TestPropertySource("classpath:context-test.properties")
@@ -24,5 +28,8 @@ public class SampleSpringBootApplicationTest {
 	@Test
 	public void contextLoads() {
 		assertThat(appContexContext).isNotNull();
+		assertThat(appContexContext.getBean(SampleRepositoryImpl.class)).isNotNull();
+		assertThat(appContexContext.getBean(SampleRepositoryImpl2.class)).isNotNull();
+		assertThat(appContexContext.getBean(SampleServiceImpl.class)).isNotNull();
 	}
 }
