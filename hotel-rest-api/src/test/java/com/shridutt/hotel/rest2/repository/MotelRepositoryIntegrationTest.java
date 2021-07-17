@@ -2,6 +2,7 @@ package com.shridutt.hotel.rest2.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.List;
@@ -47,7 +48,7 @@ public class MotelRepositoryIntegrationTest {
 	
 	@Test
 	public void test_room_availability_found() {
-		buildData(roomRepository, motelRepository, cityRepository);;
+		buildData(roomRepository, motelRepository, cityRepository);
 
 		Page<Room> allFoundRooms = roomRepository.findAll(PageRequest.of(0, 10));
 		
@@ -64,7 +65,7 @@ public class MotelRepositoryIntegrationTest {
 	
 	@Test
 	public void test_room_availability_not_found_due_to_no_bookings_defined() {
-		buildData(roomRepository, motelRepository, cityRepository);;
+		buildData(roomRepository, motelRepository, cityRepository);
 
 		Page<Room> allFoundRooms = roomRepository.findAll(PageRequest.of(0, 10));
 		
@@ -81,7 +82,7 @@ public class MotelRepositoryIntegrationTest {
 
 	@Test
 	public void test_room_availability_not_found() {
-		buildData(roomRepository, motelRepository, cityRepository);;
+		buildData(roomRepository, motelRepository, cityRepository);
 
 		Page<Room> allFoundRooms = roomRepository.findAll(PageRequest.of(0, 10));
 		
@@ -96,23 +97,45 @@ public class MotelRepositoryIntegrationTest {
 		assertThat(roomsWithAvailbility.size()).isEqualTo(0);
 	}
 	
+	@Test
+	public void test_findByPricePerNight_should_return_zero() {
+		buildData(roomRepository, motelRepository, cityRepository);
+		
+		BigDecimal pricePerNight = new BigDecimal(999.00);
+		Page<Room> actual = roomRepository.findByPricePerNight(pricePerNight, PageRequest.of(0, 10));
+		
+		assertThat(actual.getContent().size()).isEqualTo(0);
+	}
+	
+	@Test
+	public void test_findByPricePerNight_should_return_2() {
+		buildData(roomRepository, motelRepository, cityRepository);
+		
+		BigDecimal pricePerNight = new BigDecimal(2000.00);
+		Page<Room> actual = roomRepository.findByPricePerNight(pricePerNight, PageRequest.of(0, 10));
+		
+		assertThat(actual.getContent().size()).isEqualTo(2);
+	}
+	
+	
 	private void buildData(RoomRepository roomRepository, MotelRepository motelRepository, CityRepository cityRepository) {
 		City city = saveCity(cityRepository);
 		Motel motel1 = saveMotel1(motelRepository, city);
 		Motel motel2 = saveMotel2(motelRepository, city);
-		saveRoom(roomRepository, motel1, "room_type_1", 100);
-		saveRoom(roomRepository, motel1, "room_type_2", 200);
-		saveRoom(roomRepository, motel1, "room_type_3", 300);
+		saveRoom(roomRepository, motel1, "room_type_1", 100, new BigDecimal(1000.00));
+		saveRoom(roomRepository, motel1, "room_type_2", 200, new BigDecimal(2000.00));
+		saveRoom(roomRepository, motel1, "room_type_3", 300, new BigDecimal(3000.00));
 		
-		saveRoom(roomRepository, motel2, "room_type_1", 100);
-		saveRoom(roomRepository, motel2, "room_type_2", 200);
-		saveRoom(roomRepository, motel2, "room_type_3", 300);
+		saveRoom(roomRepository, motel2, "room_type_1", 100, new BigDecimal(4000.00));
+		saveRoom(roomRepository, motel2, "room_type_2", 200, new BigDecimal(5000.00));
+		saveRoom(roomRepository, motel2, "room_type_3", 300, new BigDecimal(6000.00));
 	}
 	
-	private Room saveRoom(RoomRepository roomRepository, Motel motel, String roomType, int roomSize) {
+	private Room saveRoom(RoomRepository roomRepository, Motel motel, String roomType, int roomSize, BigDecimal pricePerNight) {
 		Room room = new Room();
 		room.setType("room_1");
 		room.setRoomSize(100);
+		room.setPricePerNight(pricePerNight);
 		HashMap<LocalDate, Boolean> availabilityHashMap = new HashMap<>();
 		
 		availabilityHashMap.put(LocalDate.of(2021, 07, 16), false);

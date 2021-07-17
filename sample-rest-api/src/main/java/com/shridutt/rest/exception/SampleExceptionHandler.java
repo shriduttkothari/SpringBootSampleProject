@@ -17,8 +17,12 @@ public class SampleExceptionHandler {
 
 	@ExceptionHandler(SampleException.class)
 	public @ResponseBody ResponseEntity<ErrorDTO> handleSampleException(SampleException ex) {
+		return responsdWith(ex, HttpStatus.BAD_REQUEST);
+	}
+
+	private ResponseEntity<ErrorDTO> responsdWith(Exception ex, HttpStatus statusCode) {
 		ErrorDTO errorResponse = new ErrorDTO();
 		errorResponse.setError(ex.getMessage());
-		return new ResponseEntity<>(errorResponse, HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>(errorResponse, statusCode);
 	}
 }

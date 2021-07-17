@@ -21,13 +21,13 @@ import lombok.Data;
 
 @Data
 @Entity
+
 @Table(name = "room")
 public class Room {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
-	
 	private String type;
 	private BigDecimal pricePerNight;
 	private int roomSize;

@@ -1,4 +1,4 @@
-package com.shridutt.rest.controller;
+package com.shridutt.rest.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatExceptionOfType;
@@ -10,7 +10,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import com.shridutt.rest.dto.StringResponse;
 import com.shridutt.rest.exception.SampleException;
-import com.shridutt.rest.service.SampleServiceImpl;
 
 import lombok.SneakyThrows;
 
