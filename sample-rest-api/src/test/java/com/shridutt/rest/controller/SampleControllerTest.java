@@ -46,8 +46,10 @@ public class SampleControllerTest {
 		when(sampleService.getStringResponse())
 				.thenReturn(StringResponse.builder().echo("Default Hello World!").build());
 
-		mockMvc.perform(get("/defaultHello")).andDo(print()).andExpect(status().isOk())
-				.andExpect(jsonPath("$.echo").value("Default Hello World!"));
+		mockMvc.perform(get("/defaultHello"))
+			.andDo(print())
+			.andExpect(status().isOk())
+			.andExpect(jsonPath("$.echo").value("Default Hello World!"));
 	}
 
 	@Test
@@ -56,7 +58,8 @@ public class SampleControllerTest {
 				.thenReturn(StringResponse.builder().echo("Default Hello World!").build());
 
 		mockMvc.perform(get("/defaultHello").param("message", "False Message")).andDo(print())
-				.andExpect(status().isOk()).andExpect(jsonPath("$.echo").value("Default Hello World!"));
+				.andExpect(status().isOk())
+				.andExpect(jsonPath("$.echo").value("Default Hello World!"));
 	}
 
 	@Test

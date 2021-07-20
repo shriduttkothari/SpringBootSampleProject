@@ -50,6 +50,4 @@ public class SampleController {
 		StringResponse stringResponse = sampleService.insertStringResponse(mycustomBody.getEcho());
 		return ResponseEntity.ok(stringResponse);
 	}
-
-	
 }
