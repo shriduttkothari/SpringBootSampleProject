@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.shridutt.rest.di.Car;
-import com.shridutt.rest.di.ElectricEngine;
-import com.shridutt.rest.di.PetrolEngine;
 import com.shridutt.rest.dto.CustomRequest;
 import com.shridutt.rest.dto.StringResponse;
 import com.shridutt.rest.service.SampleService;
@@ -23,30 +20,9 @@ public class SampleController {
 	@Autowired
 	private SampleService sampleService;
 
-	private PetrolEngine petrolEngine;
-	private ElectricEngine electricEngine;
-	
 	@RequestMapping(value = "/defaultHello", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<StringResponse> getEcho() {
-		
-		
-		Car altrozCar1 = new Car(petrolEngine);
-		Car altrozCar2 = new Car(electricEngine);
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 		StringResponse stringResponse = sampleService.getStringResponse();
 		return ResponseEntity.ok(stringResponse);
 	}

@@ -1,9 +1,15 @@
 package com.shridutt.rest.di;
 
+import lombok.Data;
+
+@Data
 public class ElectricEngine implements Engine {
 
-	public ElectricEngine(int size) {
-		
+	private int hoursePower;
+	private String engineType = "Electric";
+	
+	public ElectricEngine(int hoursePower) {
+		this.hoursePower = hoursePower;
 	}
 	
 	@Override
