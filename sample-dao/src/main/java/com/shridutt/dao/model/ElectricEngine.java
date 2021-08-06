@@ -1,16 +1,14 @@
-package com.shridutt.rest.di;
+package com.shridutt.dao.model;
+
+import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
+@Component
 @Data
 public class ElectricEngine implements Engine {
 
-	private int hoursePower;
 	private String engineType = "Electric";
-	
-	public ElectricEngine(int hoursePower) {
-		this.hoursePower = hoursePower;
-	}
 	
 	@Override
 	public boolean start() {

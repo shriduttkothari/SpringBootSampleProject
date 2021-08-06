@@ -1,4 +1,4 @@
-package com.shridutt.rest.di;
+package com.shridutt.dao.model;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Component;
@@ -6,7 +6,6 @@ import org.springframework.stereotype.Component;
 import lombok.Data;
 
 @Component
-@Primary
 @Data
 public class PetrolEngine implements Engine {
 

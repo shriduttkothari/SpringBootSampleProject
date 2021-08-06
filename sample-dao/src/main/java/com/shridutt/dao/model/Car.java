@@ -1,11 +1,10 @@
-package com.shridutt.rest.di;
+package com.shridutt.dao.model;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import lombok.Data;
 
-@Component
 @Data
 public class Car {
 
@@ -16,9 +15,4 @@ public class Car {
 		this.engine = engine;
 	}
 	
-	@Bean
-	public ElectricEngine electricEngine() {
-		ElectricEngine electricEngine = new ElectricEngine(100);
-		return electricEngine;
-	}
 }

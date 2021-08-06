@@ -1,4 +1,4 @@
-package com.shridutt.rest.di;
+package com.shridutt.dao.model;
 
 public interface Engine {
 
