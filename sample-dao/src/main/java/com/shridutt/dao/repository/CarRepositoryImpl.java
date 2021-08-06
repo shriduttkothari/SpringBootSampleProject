@@ -1,4 +1,4 @@
-package com.shridutt.dao;
+package com.shridutt.dao.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;

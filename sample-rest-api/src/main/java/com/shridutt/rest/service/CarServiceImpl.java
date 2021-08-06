@@ -3,9 +3,9 @@ package com.shridutt.rest.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shridutt.dao.CarRepository;
 import com.shridutt.dao.exception.CarNotFoundException;
 import com.shridutt.dao.model.Car;
+import com.shridutt.dao.repository.CarRepository;
 import com.shridutt.rest.dto.CarDTO;
 import com.shridutt.rest.mapper.CarMapper;
 

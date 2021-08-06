@@ -1,4 +1,4 @@
-package com.shridutt.dao;
+package com.shridutt.dao.repository;
 
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;

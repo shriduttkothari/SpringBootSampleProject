@@ -1,4 +1,4 @@
-package com.shridutt.dao;
+package com.shridutt.dao.repository;
 
 public interface SampleRepository {
 

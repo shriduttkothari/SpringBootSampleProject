@@ -10,8 +10,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.shridutt.dao.SampleRepositoryImpl;
-import com.shridutt.dao.SampleRepositoryImpl2;
+import com.shridutt.dao.repository.SampleRepositoryImpl;
+import com.shridutt.dao.repository.SampleRepositoryImpl2;
 import com.shridutt.rest.service.SampleServiceImpl;
 
 @ExtendWith(SpringExtension.class)

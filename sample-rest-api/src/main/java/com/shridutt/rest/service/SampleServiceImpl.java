@@ -3,7 +3,7 @@ package com.shridutt.rest.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.shridutt.dao.SampleRepository;
+import com.shridutt.dao.repository.SampleRepository;
 import com.shridutt.rest.dto.StringResponse;
 import com.shridutt.rest.exception.SampleException;
 
