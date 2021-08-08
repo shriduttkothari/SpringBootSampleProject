@@ -1,18 +1,22 @@
 package com.shridutt.dao.model;
 
-import org.springframework.context.annotation.Bean;
-import org.springframework.stereotype.Component;
-
 import lombok.Data;
 
 @Data
 public class Car {
 
-	private String name = "Altroz";
-	private Engine engine;
-	
-	public Car(Engine engine) {
-		this.engine = engine;
+	private int id;
+	private String name;
+	private String engineType;
+
+	public Car(String name, String engineType) {
+		this.name = name;
+		this.engineType = engineType;
 	}
 	
+	public Car(int id, String name, String engineType) {
+		this.id = id;
+		this.name = name;
+		this.engineType = engineType;
+	}
 }

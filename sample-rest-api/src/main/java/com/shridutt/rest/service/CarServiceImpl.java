@@ -1,5 +1,8 @@
 package com.shridutt.rest.service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,16 +22,22 @@ public class CarServiceImpl implements CarService {
 	private CarMapper carMapper;
 	
 	@Override
-	public CarDTO getCarByCarType(String carType) throws CarNotFoundException {
-		Car carFromDB = carRepository.getCarByCarType(carType);
-		CarDTO carDTO = carMapper.mapToCarDTO(carFromDB);
-		return carDTO;
+	public List<CarDTO> getCarByCarType(String carType) throws CarNotFoundException {
+		List<Car> carsFromDB = carRepository.getCarByCarType(carType);
+		
+		List<CarDTO> carDTOs = carsFromDB.stream()
+				.map(carFromDB -> carMapper.mapToCarDTO(carFromDB))
+				.collect(Collectors.toList());
+
+		return carDTOs;
 	}
 
 	@Override
 	public CarDTO save(CarDTO carDTO) {
-		// TODO Auto-generated method stub
-		return null;
+		Car car = carMapper.mapToCar(carDTO);
+		Car carFromDB = carRepository.saveCar(car);
+		CarDTO carDTOFromDB = carMapper.mapToCarDTO(carFromDB);
+		return carDTOFromDB;
 	}
 
 }

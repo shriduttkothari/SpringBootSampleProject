@@ -1,10 +1,13 @@
 package com.shridutt.dao.repository;
 
+import java.util.List;
+
+import com.shridutt.dao.exception.CarNotFoundException;
 import com.shridutt.dao.model.Car;
 
 public interface CarRepository {
 
-	Car getCarByCarType(String carType);
+	List<Car> getCarByCarType(String carType) throws CarNotFoundException;
 	
 	Car saveCar(Car car);
 }

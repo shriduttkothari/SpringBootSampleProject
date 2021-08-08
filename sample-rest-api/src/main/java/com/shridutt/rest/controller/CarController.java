@@ -1,5 +1,7 @@
 package com.shridutt.rest.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -22,9 +24,9 @@ public class CarController {
 	private CarService carService;
 	
 	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<Object> getCar(@RequestParam("cartype") String carType) throws CarNotFoundException {
-		CarDTO carDTO = carService.getCarByCarType(carType);
-		return ResponseEntity.ok(carDTO);
+	public ResponseEntity<List<CarDTO>> getCar(@RequestParam("cartype") String carType) throws CarNotFoundException {
+		List<CarDTO> carDTOList = carService.getCarByCarType(carType);
+		return ResponseEntity.ok(carDTOList);
 	}
 	
 	@PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 

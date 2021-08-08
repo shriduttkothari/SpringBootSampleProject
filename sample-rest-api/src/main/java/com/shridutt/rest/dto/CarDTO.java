@@ -1,7 +1,5 @@
 package com.shridutt.rest.dto;
 
-import com.shridutt.dao.model.Engine;
-
 import lombok.Data;
 
 @Data
