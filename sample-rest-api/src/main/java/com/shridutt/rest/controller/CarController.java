@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shridutt.dao.exception.CarNotFoundException;
+import com.shridutt.dao.exception.ConflictException;
 import com.shridutt.rest.dto.CarDTO;
+import com.shridutt.rest.exception.InvalidCarTypeException;
 import com.shridutt.rest.service.CarService;
 
 @RestController
@@ -24,14 +26,18 @@ public class CarController {
 	private CarService carService;
 	
 	@GetMapping(produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<List<CarDTO>> getCar(@RequestParam("cartype") String carType) throws CarNotFoundException {
+	public ResponseEntity<List<CarDTO>> getCar(@RequestParam("cartype") String carType) throws CarNotFoundException, InvalidCarTypeException {
+		if(!"petrol".equals(carType) && !"electric".equals(carType)) {
+			throw new InvalidCarTypeException();
+		}
+		
 		List<CarDTO> carDTOList = carService.getCarByCarType(carType);
 		return ResponseEntity.ok(carDTOList);
 	}
 	
 	@PostMapping(consumes = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE}, 
 			produces= {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-	public ResponseEntity<CarDTO> saveCar(@RequestBody CarDTO carDTO) {
+	public ResponseEntity<CarDTO> saveCar(@RequestBody CarDTO carDTO) throws ConflictException {
 		
 		CarDTO carDTOSaved = carService.save(carDTO);
 		

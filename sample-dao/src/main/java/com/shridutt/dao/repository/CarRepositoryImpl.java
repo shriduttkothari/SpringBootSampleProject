@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.shridutt.dao.exception.CarNotFoundException;
+import com.shridutt.dao.exception.ConflictException;
 import com.shridutt.dao.model.Car;
 
 @Repository
@@ -24,15 +25,21 @@ public class CarRepositoryImpl implements CarRepository {
 	}
 
 	@Override
-	public Car saveCar(Car car) {
-		String queryString = "INSERT INTO car (car_name,engine_type) VALUES ('"+car.getName()+"','"+car.getEngineType()+"');";
-		int rowsAffected = jdbcTemplate.update(queryString);
+	public Car saveCar(Car car) throws ConflictException {
+		try {
+			getCar(car.getEngineType());
+		} catch (CarNotFoundException e) {
+			String queryString = "INSERT INTO car (car_name,engine_type) VALUES ('"+car.getName()+"','"+car.getEngineType()+"');";
+			int rowsAffected = jdbcTemplate.update(queryString);
 
-		if (rowsAffected > 0) {
-			return getCar(car.getName(), car.getEngineType());
-		} else {
-			return null;
-		}
+			if (rowsAffected > 0) {
+				return getCar(car.getName(), car.getEngineType());
+			} else {
+				return null;
+			}
+		} 
+		throw new ConflictException();
+		
 	}
 
 	private List<Car> getCar(String carType) throws CarNotFoundException {
