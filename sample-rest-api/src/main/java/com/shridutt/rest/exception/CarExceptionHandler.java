@@ -1,5 +1,6 @@
 package com.shridutt.rest.exception;
 
+import java.time.OffsetDateTime;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,7 @@ public class CarExceptionHandler {
 	public ResponseEntity<ErrorDTO> handleCarNotFoundException(CarNotFoundException carNotFoundException) {
 		ErrorDTO errorDTO = new ErrorDTO();
 		errorDTO.setErrorId(UUID.randomUUID());
+		errorDTO.setTimeStamp(OffsetDateTime.now());
 		errorDTO.setError("Car Not Found In Database !!");
 		
 		ResponseEntity<ErrorDTO> responseEntity = new ResponseEntity<ErrorDTO>(errorDTO, HttpStatus.NOT_FOUND);
@@ -29,6 +31,7 @@ public class CarExceptionHandler {
 	public ResponseEntity<ErrorDTO> handleInvalidCarTypeException(InvalidCarTypeException invalidCarTypeException) {
 		ErrorDTO errorDTO = new ErrorDTO();
 		errorDTO.setErrorId(UUID.randomUUID());
+		errorDTO.setTimeStamp(OffsetDateTime.now());
 		errorDTO.setError("CarType is Invalid !!");
 		
 		ResponseEntity<ErrorDTO> responseEntity = new ResponseEntity<ErrorDTO>(errorDTO, HttpStatus.BAD_REQUEST);
@@ -39,6 +42,7 @@ public class CarExceptionHandler {
 	public ResponseEntity<ErrorDTO> handleConflictException(ConflictException conflictException) {
 		ErrorDTO errorDTO = new ErrorDTO();
 		errorDTO.setErrorId(UUID.randomUUID());
+		errorDTO.setTimeStamp(OffsetDateTime.now());
 		errorDTO.setError("Car Already Exists In Database !!");
 		
 		ResponseEntity<ErrorDTO> responseEntity = new ResponseEntity<ErrorDTO>(errorDTO, HttpStatus.CONFLICT);
