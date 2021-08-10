@@ -9,6 +9,8 @@ import org.springframework.context.annotation.PropertySource;
 @EnableAutoConfiguration
 @PropertySource("classpath:application.properties")
 @PropertySource("classpath:dao-application.properties")
+@PropertySource("classpath:dao-application-h2.properties")
+@PropertySource("classpath:dao-application-mysql.properties")
 public class SampleSpringBootApplication {
 
 	public static void main(String[] args) {

@@ -3,27 +3,27 @@ package com.shridutt.dao.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 
+@ConditionalOnProperty(name = "sampleapp.datasource", havingValue = "h2")
 @Configuration
-public class DataSourceConfig {
+public class H2DataSourceConfig {
 
-	@Value("${spring.datasource.username}")
+	@Value("${sampleapp.h2.spring.datasource.username}")
 	private String userName;
 
-	@Value("${spring.datasource.password}")
+	@Value("${sampleapp.h2.spring.datasource.password}")
 	private String password;
 
-	@Value("${spring.datasource.driver-class-name}")
+	@Value("${sampleapp.h2.spring.datasource.driver-class-name}")
 	private String driverClassName;
 
-	@Value("${spring.datasource.url}")
+	@Value("${sampleapp.h2.spring.datasource.url}")
 	private String url;
 
-	@Primary
 	@Bean
 	public DataSource getDataSource() {
 		DataSourceBuilder<?> dataSourceBuilder = DataSourceBuilder.create();
