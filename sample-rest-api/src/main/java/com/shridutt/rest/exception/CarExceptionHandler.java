@@ -49,4 +49,15 @@ public class CarExceptionHandler {
 		return responseEntity;
 	}
 	
+	@ExceptionHandler(Exception.class)
+	public ResponseEntity<ErrorDTO> handleGenericcException(Exception cxception) {
+		ErrorDTO errorDTO = new ErrorDTO();
+		errorDTO.setErrorId(UUID.randomUUID());
+		errorDTO.setTimeStamp(OffsetDateTime.now());
+		errorDTO.setError("Internal Server Error, Something went wrong on server!!");
+		
+		ResponseEntity<ErrorDTO> responseEntity = new ResponseEntity<ErrorDTO>(errorDTO, HttpStatus.INTERNAL_SERVER_ERROR);
+		return responseEntity;
+	}
+	
 }
