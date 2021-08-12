@@ -12,6 +12,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import com.shridutt.dao.repository.SampleRepositoryImpl;
 import com.shridutt.dao.repository.SampleRepositoryImpl2;
+import com.shridutt.rest.service.CarServiceImpl;
 import com.shridutt.rest.service.SampleServiceImpl;
 
 @ExtendWith(SpringExtension.class)
@@ -31,5 +32,6 @@ public class SampleSpringBootApplicationTest {
 		assertThat(appContexContext.getBean(SampleRepositoryImpl.class)).isNotNull();
 		assertThat(appContexContext.getBean(SampleRepositoryImpl2.class)).isNotNull();
 		assertThat(appContexContext.getBean(SampleServiceImpl.class)).isNotNull();
+		assertThat(appContexContext.getBean(CarServiceImpl.class)).isNotNull();
 	}
 }
